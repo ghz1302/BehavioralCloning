@@ -19,10 +19,10 @@ The goals / steps of this project are the following:
 [//]: # (Image References)
 
 [image1]: ./examples/placeholder.png "Model Visualization"
-[image2]: ./examples/center_2017_08_19_09_14_11_010.png "Grayscaling"
-[image3]: ./examples/center_2017_08_19_10_07_22_844.png "Recovery Image"
-[image4]: ./examples/center_2017_08_19_10_07_23_130.png "Recovery Image"
-[image5]: ./examples/center_2017_08_19_10_07_23_267.png "Recovery Image"
+[image2]: ./examples/center_2017_08_19_09_14_11_010.jpg "Grayscaling"
+[image3]: ./examples/center_2017_08_19_10_07_22_844.jpg "Recovery Image"
+[image4]: ./examples/center_2017_08_19_10_07_23_130.jpg "Recovery Image"
+[image5]: ./examples/center_2017_08_19_10_07_23_267.jpg "Recovery Image"
 [image6]: ./examples/original.png "Normal Image"
 [image7]: ./examples/flip.png "Flipped Image"
 
