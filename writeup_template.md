@@ -115,7 +115,7 @@ dense(1)|||
 
 To capture good driving behavior, I first recorded two laps on track one using center lane driving. Here is an example image of center lane driving:
 
-![alt text][image4]
+![alt text][image2]
 
 I then recorded the vehicle recovering from the left side and right sides of the road back to center so that the vehicle would learn to .... These images show what a recovery looks like starting from ... :
 
@@ -130,9 +130,9 @@ To augment the data sat, I also flipped images and angles thinking that this wou
 ![alt text][image6]
 ![alt text][image7]
 
-Etc ....
+And I used images of driving reverse track.
 
-After the collection process, I had X number of data points. I then preprocessed this data by ...
+After the collection process, I had 8,733 number of images and 5,465 data sets . I then preprocessed this data by ...
 
 
 I finally randomly shuffled the data set and put Y% of the data into a validation set. 
