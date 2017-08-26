@@ -11,12 +11,12 @@ samples = []
 with open('driving_log.csv') as csvfile:
     reader = csv.reader(csvfile)
     for line in reader:
-        lines.append(line)
+        #lines.append(line)
         samples.append(line)
 
 train_samples, validation_samples = train_test_split(samples, test_size=0.2)
 
-images = []
+'''images = []
 measurements = []
 for line in lines:
     for i in range(3):
@@ -29,20 +29,15 @@ for line in lines:
             continue  # skip adding these rows in the for loop
         images.append(image)
         measurement = float(line[3])
-        measurements.append(measurement)    
+        measurements.append(measurement)    '''
     
-augmented_images, augmented_measurements = [], []
-for image, measurement in zip(images, measurements):
-    augmented_images.append(image)
-    augmented_measurements.append(measurement)
-    augmented_images.append(cv2.flip(image,1))
-    augmented_measurements.append(measurement*-1.0)
+
     
 #X_train = np.array(images)
 #y_train = np.array(measurements)
 
-X_train = np.array(augmented_images)
-y_train = np.array(augmented_measurements)
+#X_train = np.array(augmented_images)
+#y_train = np.array(augmented_measurements)
 
 
 def generator(samples, batch_size=32):
@@ -61,9 +56,15 @@ def generator(samples, batch_size=32):
                 images.append(center_image)
                 angles.append(center_angle)
 
+                augmented_images, augmented_angles = [], []
+                for image, angle in zip(images, angles):
+                    augmented_images.append(image)
+                    augmented_angles.append(angle)
+                    augmented_images.append(cv2.flip(image,1))
+                    augmented_angles.append(angle*-1.0)
             # trim image to only see section with road
-            X_train = np.array(images)
-            y_train = np.array(angles)
+            X_train = np.array(augmented_images)
+            y_train = np.array(augmented_angles)
             yield sklearn.utils.shuffle(X_train, y_train)
             
 from keras.models import Sequential
@@ -97,19 +98,21 @@ validation_generator = generator(validation_samples, batch_size=32)
 
 ch, row, col = 3, 80, 320  # Trimmed image format
 
-history_object = model.fit_generator(train_generator, samples_per_epoch =
-    len(train_samples), validation_data = 
-    validation_generator,
-    nb_val_samples = len(validation_samples), 
-    nb_epoch=5, verbose=1)
 
-model.fit(X_train, y_train, validation_split=0.2, shuffle=True, nb_epoch=3)
+
+#model.fit(X_train, y_train, validation_split=0.2, shuffle=True, nb_epoch=3)
 model.fit_generator(train_generator, samples_per_epoch= len(train_samples), 
                     validation_data=validation_generator, 
                     nb_val_samples=len(validation_samples), nb_epoch=3)
 model.save('model.h5')
 
 ### print the keys contained in the history object
+history_object = model.fit_generator(train_generator, samples_per_epoch =
+    len(train_samples), validation_data = 
+    validation_generator,
+    nb_val_samples = len(validation_samples), 
+    nb_epoch=5, verbose=1)
+
 print(history_object.history.keys())
 
 ### plot the training and validation loss for each epoch
