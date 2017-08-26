@@ -54,9 +54,9 @@ The model.py file contains the code for training and saving the convolution neur
 
 ####1. An appropriate model architecture has been employed
 
-My model consists of a convolution neural network with 3x3 filter sizes and depths between 32 and 128 (h5create.py lines 18-24) 
+My model consists of a convolution neural network with 5x5, 3x3 filter sizes  (h5create.py lines 81-90) 
 
-The model includes RELU layers to introduce nonlinearity (code line 20), and the data is normalized in the model using a Keras lambda layer (code line 18). 
+The model includes RELU layers to introduce nonlinearity (code line 81-85), and the data is normalized in the model using a Keras lambda layer (code line 79). 
 
 ####2. Attempts to reduce overfitting in the model
 
@@ -70,25 +70,16 @@ The model used an adam optimizer, so the learning rate was not tuned manually (h
 
 ####4. Appropriate training data
 
-Training data was chosen to keep the vehicle driving on the road. I used a combination of center lane driving, recovering from the left and right sides of the road ... 
-
-For details about how I created the training data, see the next section. 
+Training data was chosen to keep the vehicle driving on the road. I used a combination of center lane driving, recovering from the left and right sides of the road, and driving reserve on track.
 
 ###Model Architecture and Training Strategy
 
 ####1. Solution Design Approach
 
-The overall strategy for deriving a model architecture was to ...
+My first step was to use a convolution neural network model similar to the NVIDIA Architecture. 
 
-My first step was to use a convolution neural network model similar to the ... I thought this model might be appropriate because ...
-
-In order to gauge how well the model was working, I split my image and steering angle data into a training and validation set. I found that my first model had a low mean squared error on the training set but a high mean squared error on the validation set. This implied that the model was overfitting. 
-
-To combat the overfitting, I modified the model so that ...
-
-Then I ... 
-
-The final step was to run the simulator to see how well the car was driving around track one. There were a few spots where the vehicle fell off the track... to improve the driving behavior in these cases, I ....
+The final step was to run the simulator to see how well the car was driving around track one. To improve the driving behavior, 
+I used more images of driving reverse track and side of the track.
 
 At the end of the process, the vehicle is able to drive autonomously around the track without leaving the road.
 
@@ -96,18 +87,18 @@ At the end of the process, the vehicle is able to drive autonomously around the 
 
 The final model architecture (h5create.py lines 78-90) consisted of a NVIDIA Architecture with the following layers and layer sizes 
 
-shape | kernel|subsample|relu
+filter | kernel|stride|Description
 |:------:|:--------:|:--------:|:--------:| 
-24|5x5|subsample=2,2|relu
-36|5x5|subsample=2,2|relu
-48|5x5|subsample=2,2|relu
+24|5x5|2,2|relu
+36|5x5|2,2|relu
+48|5x5|2,2|relu
 64|3x3| |relu
 64|3x3| |relu
 flatten|||
-dense(100)|||
-dense(50)|||
-dense(10)|||
-dense(1)|||
+dense|||100
+dense|||50
+dense|||10
+dense|||1
 
 
 
@@ -117,7 +108,7 @@ To capture good driving behavior, I first recorded two laps on track one using c
 
 ![alt text][image2]
 
-I then recorded the vehicle recovering from the left side and right sides of the road back to center so that the vehicle would learn to .... These images show what a recovery looks like starting from ... :
+I then recorded the vehicle recovering from the left side and right sides of the road back to center so that the vehicle would learn to recover position into center. 
 
 ![alt text][image3]
 ![alt text][image4]
@@ -132,9 +123,9 @@ To augment the data sat, I also flipped images and angles thinking that this wou
 
 And I used images of driving reverse track.
 
-After the collection process, I had 8,733 number of images and 5,465 data sets . I then preprocessed this data by ...
+After the collection process, I had 21,102 number of images and 5,465 data sets . I then preprocessed this data by using generator funtion.
 
 
-I finally randomly shuffled the data set and put Y% of the data into a validation set. 
+I finally randomly shuffled the data set and put 0.6% of the data into a validation set. 
 
-I used this training data for training the model. The validation set helped determine if the model was over or under fitting. The ideal number of epochs was Z as evidenced by ... I used an adam optimizer so that manually training the learning rate wasn't necessary.
+I used this training data for training the model. The validation set helped determine if the model was over or under fitting. The ideal number of epochs was 32. I used an adam optimizer so that manually training the learning rate wasn't necessary.
