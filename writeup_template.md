@@ -97,7 +97,7 @@ At the end of the process, the vehicle is able to drive autonomously around the 
 The final model architecture (h5create.py lines 78-90) consisted of a NVIDIA Architecture with the following layers and layer sizes 
 
 shape | kernel|subsample|relu
------
+|:------:|:--------:|:--------:|:--------:| 
 24|5x5|subsample=2,2|relu
 36|5x5|subsample=2,2|relu
 48|5x5|subsample=2,2|relu
