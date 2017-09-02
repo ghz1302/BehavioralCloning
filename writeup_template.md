@@ -48,7 +48,7 @@ python drive.py model.h5
 
 ####3. Submission code is usable and readable
 
-The model.py file contains the code for training and saving the convolution neural network. The file shows the pipeline I used for training and validating the model, and it contains comments to explain how the code works.
+The h5create.py file contains the code for training and saving the convolution neural network. The file shows the pipeline I used for training and validating the model, and it contains comments to explain how the code works.
 
 ###Model Architecture and Training Strategy
 
@@ -56,17 +56,15 @@ The model.py file contains the code for training and saving the convolution neur
 
 My model consists of a convolution neural network with 5x5, 3x3 filter sizes  (h5create.py lines 81-90) 
 
-The model includes RELU layers to introduce nonlinearity (code line 81-85), and the data is normalized in the model using a Keras lambda layer (code line 79). 
+The model includes RELU layers to introduce nonlinearity (code line 81-85), and the data is normalized in the model using a Keras lambda layer (code line 80). 
 
 ####2. Attempts to reduce overfitting in the model
 
-The model contains dropout layers in order to reduce overfitting (h5create.py lines 21). 
-
-The model was trained and validated on different data sets to ensure that the model was not overfitting (code line 10-16). The model was tested by running it through the simulator and ensuring that the vehicle could stay on the track.
+The model doesn't contain dropout layers in order to reduce overfitting. 
 
 ####3. Model parameter tuning
 
-The model used an adam optimizer, so the learning rate was not tuned manually (h5create.py line 25).
+The model used an adam optimizer, so the learning rate was not tuned manually (h5create.py line 93).
 
 ####4. Appropriate training data
 
